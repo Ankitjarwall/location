@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <button id="find-me">Show my location</button><br />
+    <button id="find-me">Share my location</button>
+    <button id="stop-me">Stop Sharing my location</button><br />
     <p id="status"></p>
     <a id="map-link" target="_blank"></a>
     <script>
+        var state;
         function geoFindMe() {
 
             const status = document.querySelector('#status');
@@ -37,12 +39,21 @@
             if (!navigator.geolocation) {
                 status.textContent = 'Geolocation is not supported by your browser';
             } else {
-                status.textContent = 'Locating…';
                 navigator.geolocation.getCurrentPosition(success, error);
             }
-            setInterval(geoFindMe, 10000)
+
         }
-        document.querySelector('#find-me').addEventListener('click', geoFindMe);
+        var myTimeout;
+        function start() {
+            myTimeout = setInterval(geoFindMe, 5000);
+        }
+        function Stop() {
+            console.log('success');
+            clearTimeout(myTimeout);
+        }
+        document.querySelector('#find-me').addEventListener('click', start);
+        document.querySelector('#stop-me').addEventListener('click', Stop);
+
     </script>
 </body>
 
