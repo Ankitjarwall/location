@@ -40,7 +40,7 @@
                 status.textContent = 'Locating…';
                 navigator.geolocation.getCurrentPosition(success, error);
             }
-            geoFindMe()
+            setInterval(geoFindMe, 10000)
         }
         document.querySelector('#find-me').addEventListener('click', geoFindMe);
     </script>
